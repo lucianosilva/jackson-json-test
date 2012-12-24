@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 
 import com.blog.lucianosilva.bean.Author;
 import com.blog.lucianosilva.bean.Book;
@@ -34,7 +35,8 @@ public class JacksonTesting {
 		// Jackson Object Mapper
 		//
 		ObjectMapper mapper = new ObjectMapper();
-		
+		mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT, true);
+
 		//
 		List<Isbn> isbn = new ArrayList<Isbn>();
 		isbn.add( new Isbn("0-00-225010-1") );
@@ -62,14 +64,11 @@ public class JacksonTesting {
 			logger.debug(jsonFormatted);
 			
 		} catch (JsonGenerationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 		
 	}
