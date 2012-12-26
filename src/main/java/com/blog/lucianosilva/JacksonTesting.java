@@ -32,24 +32,35 @@ public class JacksonTesting {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		logger.info("Teste para simular a conversao de objetos Java para o formato json.");
+
 		// Jackson Object Mapper
 		//
 		ObjectMapper mapper = new ObjectMapper();
+		
+		// configura a formatacao do json para impressao com identacao
 		mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT, true);
 
 		//
+		// Cria os Objetos e Popula manualmente
+		//
+		
+		// ISBN
 		List<Isbn> isbn = new ArrayList<Isbn>();
 		isbn.add( new Isbn("0-00-225010-1") );
 		isbn.add( new Isbn("0-00-649035-2") );
 
-		//
+		// Autores
 		List<Author> authors = new ArrayList();
 		authors.add( new Author("Cornwell", "Bernard", 68, Sex.MALE) );
 
-		//
+		// Generos
 		List<Genre> genres = new ArrayList();
 		genres.add( new Genre("Historical Fantasy") );
+		genres.add( new Genre("Fantasy") );
 
+		// Livro
 		//
 		Book book = new Book();
 		book.setTitle("Sharpe's Tiger");
@@ -59,10 +70,10 @@ public class JacksonTesting {
 		book.setGenres( genres );
 
 		try {
-			
+
 			String jsonFormatted = mapper.writeValueAsString(book);
 			logger.debug(jsonFormatted);
-			
+
 		} catch (JsonGenerationException e) {
 			logger.error(e);
 		} catch (JsonMappingException e) {
@@ -70,7 +81,7 @@ public class JacksonTesting {
 		} catch (IOException e) {
 			logger.error(e);
 		}
-		
+
 	}
 
 }
